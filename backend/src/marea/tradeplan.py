@@ -212,6 +212,24 @@ def technical_evidence(artifacts: Path = ARTIFACTS) -> list[str]:
     return out
 
 
+def hs_evidence(artifacts: Path = ARTIFACTS) -> list[str]:
+    """Resultado de la E1 (long en la MA99 tras HCH de techo), leído del artefacto."""
+    paths = sorted(glob.glob(str(artifacts / "hch-ma99-*.json")))
+    if not paths:
+        return ["HCH de techo + MA99: sin artefacto (no medido)"]
+    r = json.loads(Path(paths[-1]).read_text(encoding="utf-8"))["results"]
+    c1, d = r["C1"], r["thesis_minus_B1"]
+    lo, hi = c1["ci95"]
+    dlo, dhi = d["ci95"]
+    verdict = "PASA" if lo > 0 else "NO PASA"
+    name = Path(paths[-1]).stem
+    return [
+        f"long en la MA99 tras HCH de techo ({name}, {c1['n']} trades del panel):",
+        f"  expectancy {c1['mean_r']:+.2f} R [{lo:+.2f}, {hi:+.2f}]  {verdict}",
+        f"  contra el toque de MA99 sin figura {d['diff']:+.2f} R [{dlo:+.2f}, {dhi:+.2f}]",
+    ]
+
+
 # --------------------------------------------------------------------------- #
 # Render
 # --------------------------------------------------------------------------- #
@@ -307,7 +325,8 @@ def render(
     L.append("4. EVIDENCIA DEL REPO")
     L.append("  dirección 15m: no pasó el gate (Fase 4) → sin edge direccional medido")
     L.extend("  " + x for x in technical_evidence())
-    L.append("  figuras chartistas (HCH, medias como soporte): NO medidas en este repo")
+    L.extend("  " + x for x in hs_evidence())
+    L.append("  otras figuras chartistas (triángulos, otras medias): NO medidas en este repo")
     L.append("")
     L.append("Nunca ejecuta órdenes. Decide Nichelson.")
     return "\n".join(L)
