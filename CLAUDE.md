@@ -2069,6 +2069,34 @@ no se mezcla con la fase M en curso.
    `RegimeFilter` y la calculadora citan esto desde
    `/api/backtest/stopfilter`, no desde el TSX.
 
+### Frente estratega — evaluar ideas de trade de Nichelson ✅ CERRADO (2026-10-22)
+
+Agente `estratega` y skill `/estrategia`. Detalle por fase en
+`docs/FASES_ESTRATEGA.md`. No toca la corrida forward (regla 12) y nunca
+ejecuta órdenes.
+
+- **E0**: `marea.tradeplan` arma el plan en un comando: estructura diaria,
+  tamaño por riesgo fijo, leverage máximo prudente, liquidación aislada y
+  escenarios, con la evidencia del repo leída de los artefactos.
+- **E1**: el long en la MA99 creciente tras un HCH de techo **no pasa**
+  (−0,18 R por trade, IC95% [−0,35; +0,03], 485 trades del panel). Es peor que
+  comprar cualquier toque de la MA99 sin figura (−0,18 R, IC [−0,31; −0,05]).
+  Pre-registro `PREREGISTRO_HCH_MA99.md`, artefacto `hch-ma99-*`.
+- **E2**: bitácora solo-agregar (`marea.journal`, `bitacora/planes.jsonl`).
+  Cada plan corre desde la vela diaria siguiente a su registro y se resuelve
+  solo; los resultados se recalculan, no se guardan. Mide el criterio de
+  Nichelson con el tiempo.
+- **E3**: calendario del horizonte (`marea.events`): fechas de FRED, reuniones
+  del FOMC desde la página de la Fed y vencimientos de Deribit con su OI.
+- **E4**: el order block alcista diario **no pasa** (−0,06 R, IC95%
+  [−0,16; +0,05], 4.711 toques), igual que el placebo. El stop mediano queda a
+  7,9%: a 10x la liquidación llega antes en un tercio de los trades.
+  Pre-registro `PREREGISTRO_OB_DIARIO.md`, artefacto `ob-diario-*`.
+
+Con esto van cuatro reglas técnicas medidas sin ventaja (barrido y order block
+a 15m y 1h, HCH + MA99 y order block diario). Lo validado sigue siendo el lado
+del riesgo.
+
 ### Fase 7 — Alertas Telegram + sentimiento (F&G, CoinGecko)
 ### Fase 8 — Outliers Club + multi-símbolo watchlist
 

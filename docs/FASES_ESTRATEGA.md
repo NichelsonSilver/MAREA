@@ -5,6 +5,11 @@ una idea concreta de trade o inversión y la evalúe con todo lo que MAREA
 mide. No se mezcla con la fase M en curso ni toca la corrida forward
 (regla 12). Al final de cada fase: resumir y esperar confirmación.
 
+**Frente cerrado el 2026-10-22 por Nichelson**, con E0–E4 hechas. Lo que
+queda vivo es la bitácora: cada plan registrado se resuelve solo contra las
+velas (`uv run python -m marea.journal report`). Primer plan:
+`P-20261022-0001`, el long en 2.300 de ETH, en el que no entró.
+
 | fase | contenido | estado |
 |---|---|---|
 | **E0** | Agente `estratega`, skill `/estrategia` y `marea.tradeplan`: estructura diaria, tamaño por riesgo fijo, leverage máximo prudente, liquidación aislada y escenarios con el EV sin edge al lado. Primer caso real: long ETH a 2.300 sobre la MA99 tras un HCH de techo | ✅ 2026-10-22 (`02373f3`) |
