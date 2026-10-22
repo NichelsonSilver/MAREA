@@ -154,3 +154,13 @@ es lo esperable.
   encontrarlo.
 
 Ningún desenlace convierte esto en una señal ni cambia la regla 1.
+
+---
+
+## Resultado (enlace al artefacto)
+
+Corrido el 2026-10-22 con `uv run python -m marea.hs_study --until
+2026-10-21` (runner `06066a4`). Artefacto:
+`backend/artifacts/hch-ma99-20261022T205545Z.txt|json`.
+**C1 no pasa**: −0,178 R por trade, IC95% [−0,350; +0,026], n = 485 en
+139 semanas. Placebo −0,051 R [−0,176; +0,079], o sea ≈ −costo.

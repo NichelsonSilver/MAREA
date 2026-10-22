@@ -22,9 +22,16 @@ cuentas chicas (~500 USD en el frente intradía). El orden es siempre
   05-10) tienen expectancy negativa e indistinguible del placebo. Sin edge,
   el EV esperado de un trade es **−costo**, sea cual sea el R:R (álgebra,
   Fase 5).
-- **Figuras chartistas** (HCH, triángulos, medias como soporte) **no están
-  medidas** en el repo. Se describen, se dibujan sus niveles y no se les
-  asigna probabilidad. Si Nichelson quiere saber si una figura funciona, la
+- **Long en la MA99 creciente tras un HCH de techo: medido y NO pasa**
+  (E1, 22-10, `artifacts/hch-ma99-20261022T205545Z.*`, 658 perpetuos
+  diarios). Expectancy −0,18 R por trade, IC95% [−0,35; +0,03]; placebo
+  limpio (−0,05 R). Es **peor que comprar cualquier toque de la MA99** sin
+  figura (−0,18 R, IC [−0,31; −0,05]). Si un plan usa esta tesis, se cita
+  esto al lado. Ojo con 10x en altcoins: el stop a 1,1 ATR quedó detrás de
+  la liquidación en el 49% de los trades.
+- **Las demás figuras chartistas** (triángulos, otras medias como soporte)
+  **no están medidas**. Se describen, se dibujan sus niveles y no se les
+  asigna probabilidad. Si Nichelson quiere saber si una funciona, la
   respuesta es un **pre-registro** (`docs/PREREGISTRO_*.md`) y una corrida,
   no una opinión.
 - **Validado**: el orden de la volatilidad (filtro de régimen, 5-bis) y la

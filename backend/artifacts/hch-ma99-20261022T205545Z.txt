@@ -1,0 +1,54 @@
+E1 — LONG EN LA MA99 DESPUÉS DE UN HCH DE TECHO (panel diario)
+Pre-registro docs/PREREGISTRO_HCH_MA99.md (0fea916). Velas hasta 2026-10-21. 658 símbolos con ≥ 200 velas.
+
+VEREDICTO
+C1 NO PASA: el límite inferior del IC95% es -0.350 R, no > 0.
+Placebo: media -0.051 R, IC95% [-0.176, +0.079].
+
+CONFIRMATORIA Y COMPARACIONES (R neto de costo y funding)
+  C1 tesis                           n=  485 sem= 139  media -0.178 R [-0.350, +0.026]  gana 35.3%  stops 50.5%  peor -1.25  racha 19
+  B1 toque de MA99 sin figura        n= 3101 sem= 275  media +0.006 R [-0.128, +0.158]  gana 41.3%  stops 43.1%  peor -11.28  racha 63
+  placebo (entrada al azar)          n= 4980 sem= 314  media -0.051 R [-0.176, +0.079]  gana 35.2%  stops 51.9%  peor -1.17  racha 89
+  tesis − B1: -0.184 R, IC95% [-0.307, -0.047]
+  costo solo, en R, promedio de la tesis: -0.034 R
+
+RIESGO DE LA TESIS
+  stop medio 10.48% de la entrada; desvío 1.20 R por trade
+  a 10x aislado: el stop quedaba DETRÁS de la liquidación en 48.9% de los trades;
+  la pérdida se realizó más allá de la liquidación en 26.8%
+  peor trade: -1.25 R (TRXUSDT, 2026-10-07)
+
+POR AÑO (tesis)
+  2020: n=   8  media -0.291 R
+  2021: n=  69  media -0.052 R
+  2022: n=  19  media -0.083 R
+  2023: n=  81  media -0.300 R
+  2024: n= 156  media +0.083 R
+  2025: n=  94  media -0.568 R
+  2026: n=  58  media -0.245 R
+
+EXPLORATORIAS (no deciden; 13 pruebas sobre la misma muestra)
+  1a H = 5                           n=  485 sem= 139  media -0.105 R [-0.269, +0.079]  gana 42.1%  stops 42.5%  peor -1.17  racha 16
+  1b H = 10                          n=  481 sem= 139  media -0.165 R [-0.349, +0.047]  gana 34.1%  stops 57.2%  peor -1.25  racha 19
+  2 stop 1,5 ATR                     n=  485 sem= 139  media -0.119 R [-0.275, +0.055]  gana 41.2%  stops 35.3%  peor -1.12  racha 18
+  3 objetivo 2R (tope 30 d)          n=  479 sem= 138  media -0.128 R [-0.332, +0.101]  gana 31.7%  stops 66.0%  peor -1.25  racha 25
+  4 sin MA99 creciente               n=  605 sem= 163  media -0.135 R [-0.305, +0.064]  gana 35.2%  stops 51.7%  peor -1.25  racha 25
+  5a pivotes k = 2                   n=  778 sem= 168  media -0.170 R [-0.325, +0.013]  gana 35.9%  stops 50.9%  peor -1.25  racha 26
+  5b pivotes k = 4                   n=  359 sem= 117  media -0.160 R [-0.349, +0.065]  gana 34.8%  stops 51.0%  peor -1.17  racha 21
+  6a ventana 15 d                    n=  404 sem= 128  media -0.178 R [-0.360, +0.035]  gana 34.4%  stops 49.5%  peor -1.25  racha 16
+  6b ventana 60 d                    n=  540 sem= 144  media -0.164 R [-0.326, +0.024]  gana 35.7%  stops 50.0%  peor -1.25  racha 21
+  7 costo doble 0,28%                n=  485 sem= 139  media -0.196 R [-0.367, +0.010]  gana 34.8%  stops 50.5%  peor -1.35  racha 19
+  8a solo BTC y ETH                  n=   15 sem=  13  media +0.394 R [-0.225, +0.969]  gana 60.0%  stops 33.3%  peor -1.09  racha 2
+  8b solo ETH                        n=    7 sem=   7  media -0.094 R [-0.743, +0.677]  gana 42.9%  stops 42.9%  peor -1.05  racha 3
+  9 short clásico bajo el cuello     n= 1336 sem= 175  media +0.052 R [-0.136, +0.244]  gana 46.6%  stops 38.8%  peor -1.22  racha 69
+
+ETH (descriptivo, sin potencia)
+  2021-12-04  entrada 3,853.79  stop 3,507.33  salida 3,507.33 (stop, 1 d)  -1.02 R
+  2021-12-13  entrada 3,911.95  stop 3,531.88  salida 3,922.51 (time, 7 d)  -0.01 R
+  2023-03-09  entrada 1,446.45  stop 1,381.38  salida 1,381.38 (stop, 2 d)  -1.04 R
+  2023-05-12  entrada 1,754.31  stop 1,669.06  salida 1,799.69 (time, 7 d)  +0.46 R
+  2023-06-10  entrada 1,817.12  stop 1,752.53  salida 1,752.53 (stop, 1 d)  -1.05 R
+  2024-04-13  entrada 3,007.01  stop 2,780.27  salida 3,054.91 (time, 7 d)  +0.16 R
+  2025-06-22  entrada 2,132.07  stop 1,971.10  salida 2,434.80 (time, 7 d)  +1.83 R
+
+Corrida 20261022T205545Z en 7 s. Nunca ejecuta órdenes.
