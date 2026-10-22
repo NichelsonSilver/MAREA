@@ -9,4 +9,4 @@ Agente: `.claude/agents/estratega.md`. Herramienta: `uv run python -m marea.trad
 
 Delega en el agente `estratega` con la tesis de Nichelson ($ARGUMENTS). Si falta capital o riesgo por trade, usa 500 USD y 1%, y dilo.
 
-Antes de entregar, revisa tres cosas. Que cada cifra tenga su comando de origen. Que ninguna figura chartista aparezca con probabilidad, porque no están medidas. Y que el leverage propuesto no supere el "máximo prudente" que da el comando. Si el plan se va a guardar, va en `memos/trades/AAAA-MM-DD-<activo>.md`, y solo si Nichelson lo pide.
+Antes de entregar, revisa tres cosas. Que cada cifra tenga su comando de origen. Que ninguna figura chartista aparezca con probabilidad, porque no están medidas. Y que el leverage propuesto no supere el "máximo prudente" que da el comando. Si Nichelson pide guardar el plan, se registra en la bitácora (`uv run python -m marea.journal add`, fase E2). Se resuelve solo contra las velas, y `report` dice cómo le va a su criterio.

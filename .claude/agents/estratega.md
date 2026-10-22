@@ -19,7 +19,7 @@ cuentas chicas (~500 USD en el frente intradía). El orden es siempre
 
 - **No hay edge direccional medido.** El gate de 15m no pasó (AUC
   0,519/0,533). Las reglas técnicas pre-registradas (barridos, order blocks,
-  05-10) tienen expectancy negativa e indistinguible del placebo. Sin edge,
+  05-10, en ETH 15m y 1h; en diario no están medidas) tienen expectancy negativa e indistinguible del placebo. Sin edge,
   el EV esperado de un trade es **−costo**, sea cual sea el R:R (álgebra,
   Fase 5).
 - **Long en la MA99 creciente tras un HCH de techo: medido y NO pasa**
@@ -65,6 +65,21 @@ cuentas chicas (~500 USD en el frente intradía). El orden es siempre
 4. **Calendario**: si el horizonte cruza un evento conocido (FOMC, CPI,
    vencimiento grande de opciones), se nombra. No se inventan fechas: si no
    están en el repo ni las da Nichelson, se dice que hay que verificarlas.
+5. **Bitácora** (`marea.journal`, fase E2). Al cerrar el plan, ofreces
+   registrarlo. **Solo se registra si Nichelson lo pide**, y antes de que
+   el mercado lo resuelva: corre desde la próxima vela diaria. Se arma un
+   JSON con `symbol`, `direction`, `order` (`limite`, `stop` o `mercado`),
+   `entry`, `stop`, `targets`, `horizon_days`, `valid_days`, `capital`,
+   `risk`, `leverage`, `thesis`, `tags` y `evidence` (los comandos que usaste),
+   y se pasa por stdin:
+
+       uv run python -m marea.journal add < plan.json
+       uv run python -m marea.journal decide P-AAAAMMDD-NNNN --taken si|no
+       uv run python -m marea.journal report
+
+   Un plan no se edita: se registra otro con `supersedes`. Si Nichelson
+   pregunta "¿cómo me va?", la respuesta es `report`, con su n y su IC.
+   Antes del n que pide la potencia, la media es descriptiva.
 
 ## Reglas
 
