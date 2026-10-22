@@ -62,9 +62,15 @@ cuentas chicas (~500 USD en el frente intradía). El orden es siempre
    días en FRED, corres `uv run python -m marea.data.ingest todo` y
    `uv run python -m marea.monitor` primero. No se cita el IC de la Fase
    10-bis: está ciego hasta el interino.
-4. **Calendario**: si el horizonte cruza un evento conocido (FOMC, CPI,
-   vencimiento grande de opciones), se nombra. No se inventan fechas: si no
-   están en el repo ni las da Nichelson, se dice que hay que verificarlas.
+4. **Calendario** del horizonte del plan:
+
+       uv run python -m marea.events --from AAAA-MM-DD --days H
+
+   Trae FOMC (Fed), CPI, empleo, PPI, PIB, PCE, JOLTS y ventas minoristas
+   (FRED) y los vencimientos de opciones de BTC y ETH con su OI (Deribit,
+   última foto). Se nombra todo lo que cae dentro del horizonte. FRED no da
+   la hora, y el comando no cubre el BCCh ni lo no programado: se dice. Una
+   fecha que no salga del comando ni la dé Nichelson no se escribe.
 5. **Bitácora** (`marea.journal`, fase E2). Al cerrar el plan, ofreces
    registrarlo. **Solo se registra si Nichelson lo pide**, y antes de que
    el mercado lo resuelva: corre desde la próxima vela diaria. Se arma un
