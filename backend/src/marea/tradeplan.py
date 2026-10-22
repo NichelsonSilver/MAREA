@@ -230,6 +230,20 @@ def hs_evidence(artifacts: Path = ARTIFACTS) -> list[str]:
     ]
 
 
+def ob_daily_evidence(artifacts: Path = ARTIFACTS) -> list[str]:
+    """Resultado de la E4 (order block alcista en diario), leído del artefacto."""
+    paths = sorted(glob.glob(str(artifacts / "ob-diario-*.json")))
+    if not paths:
+        return ["order block diario: sin artefacto (no medido)"]
+    c1 = json.loads(Path(paths[-1]).read_text(encoding="utf-8"))["results"]["C1"]
+    lo, hi = c1["ci95"]
+    verdict = "PASA" if lo > 0 else "NO PASA"
+    return [
+        f"order block alcista 1d ({Path(paths[-1]).stem}, {c1['n']} toques del panel):",
+        f"  expectancy {c1['mean_r']:+.2f} R [{lo:+.2f}, {hi:+.2f}]  {verdict}",
+    ]
+
+
 # --------------------------------------------------------------------------- #
 # Render
 # --------------------------------------------------------------------------- #
@@ -326,6 +340,7 @@ def render(
     L.append("  dirección 15m: no pasó el gate (Fase 4) → sin edge direccional medido")
     L.extend("  " + x for x in technical_evidence())
     L.extend("  " + x for x in hs_evidence())
+    L.extend("  " + x for x in ob_daily_evidence())
     L.append("  otras figuras chartistas (triángulos, otras medias): NO medidas en este repo")
     L.append("")
     L.append("Nunca ejecuta órdenes. Decide Nichelson.")

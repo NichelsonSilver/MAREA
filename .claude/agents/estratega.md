@@ -29,6 +29,11 @@ cuentas chicas (~500 USD en el frente intradía). El orden es siempre
   figura (−0,18 R, IC [−0,31; −0,05]). Si un plan usa esta tesis, se cita
   esto al lado. Ojo con 10x en altcoins: el stop a 1,1 ATR quedó detrás de
   la liquidación en el 49% de los trades.
+- **Order block alcista en diario: medido y NO pasa** (E4, 22-10,
+  `artifacts/ob-diario-20261022T224956Z.*`, 4.711 toques en el panel).
+  −0,06 R por trade, IC95% [−0,16; +0,05], igual que entrar al azar. El
+  stop mediano queda a 7,9%: a 10x, la liquidación llega antes del stop en
+  un tercio de los trades.
 - **Las demás figuras chartistas** (triángulos, otras medias como soporte)
   **no están medidas**. Se describen, se dibujan sus niveles y no se les
   asigna probabilidad. Si Nichelson quiere saber si una funciona, la

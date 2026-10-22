@@ -132,3 +132,14 @@ lo esperable.
   encontrarlo.
 
 Ningún desenlace convierte esto en una señal ni cambia la regla 1.
+
+---
+
+## Resultado (enlace al artefacto)
+
+Corrido el 2026-10-22 con `uv run python -m marea.ob_study --until
+2026-10-21` (runner `390ddb7`). Artefacto:
+`backend/artifacts/ob-diario-20261022T224956Z.txt|json`.
+**C1 no pasa**: −0,062 R por trade, IC95% [−0,164; +0,048], n = 4.711 en
+312 semanas. Placebo −0,088 R [−0,166; −0,012], con el costo solo
+(−0,038 R) adentro: la plomería está limpia.
