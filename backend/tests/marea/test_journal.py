@@ -139,3 +139,10 @@ def test_agregado_y_potencia():
     a = aggregate([x] * 12)
     assert a["n_closed"] == 12 and a["mean_r"] == pytest.approx(x.r)
     assert aggregate([]) == {"n_closed": 0}
+
+
+def test_decide_tolera_el_fin_de_linea_de_windows(tmp_path):
+    path = tmp_path / "planes.jsonl"
+    p = add(_raw(), path, now=T0)
+    d = decide(p.id + "\r", False, path=path, now=T0)
+    assert d.plan_id == p.id and decisions(read(path)) == {p.id: False}

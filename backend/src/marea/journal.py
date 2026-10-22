@@ -156,6 +156,7 @@ def add(raw: dict[str, Any], path: Path = REGISTRY, now: datetime | None = None)
 def decide(
     plan_id: str, taken: bool, note: str = "", path: Path = REGISTRY, now: datetime | None = None
 ) -> Decision:
+    plan_id = plan_id.strip()  # un fin de línea de Windows no hace otro plan
     if plan_id not in {p.id for p in read(path) if isinstance(p, Plan)}:
         raise ValueError(f"{plan_id} no existe en la bitácora")
     d = Decision(plan_id=plan_id, taken=taken, note=note, registered_at_utc=_now(now).isoformat())
