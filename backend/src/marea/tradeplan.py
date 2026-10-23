@@ -247,6 +247,18 @@ def ob_daily_evidence(artifacts: Path = ARTIFACTS) -> list[str]:
 # --------------------------------------------------------------------------- #
 # Render
 # --------------------------------------------------------------------------- #
+#: Bajo esta fracción del riesgo pedido, el redondeo del tamaño se avisa.
+UNDERSIZED_SHARE = 0.8
+
+
+def _base(symbol: str) -> str:
+    """Activo base del par: `BTCUSDT` → `BTC`."""
+    for quote in ("USDT", "USDC"):
+        if symbol.endswith(quote) and len(symbol) > len(quote):
+            return symbol[: -len(quote)]
+    return symbol
+
+
 def _p(x: float) -> str:
     return f"{x * 100:+.2f}%"
 
@@ -298,9 +310,14 @@ def render(
         f" · stop a {z0.stop_pct * 100:.2f}% ({z0.stop_sigmas:.2f}σ)"
     )
     L.append(
-        f"  cantidad {z0.quantity:.3f} ETH · notional {z0.notional:,.2f} USD · pérdida al stop "
-        f"{z0.loss_at_stop:,.2f} USD (costos {z0.cost_usd:,.2f} incluidos)"
+        f"  cantidad {z0.quantity:.3f} {_base(symbol)} · notional {z0.notional:,.2f} USD · "
+        f"pérdida al stop {z0.loss_at_stop:,.2f} USD (costos {z0.cost_usd:,.2f} incluidos)"
     )
+    if z0.loss_at_stop < UNDERSIZED_SHARE * z0.risk_budget:
+        L.append(
+            f"  ⚠ el paso de cantidad redondea hacia abajo: se arriesga "
+            f"{z0.loss_at_stop / z0.risk_budget * 100:.0f}% de lo pedido"
+        )
     if z0.p_touch_stop is not None:
         L.append(
             f"  P(el ruido toca el stop en {plan.horizon_days:g} d) "

@@ -81,3 +81,28 @@ def test_el_leverage_no_cambia_la_perdida_al_stop():
     txt = render(s, p, funding=0.0001, stale_mark=False)
     assert "NO medidas" in txt and "Nunca ejecuta órdenes" in txt
     assert not math.isnan(p.sigma_horizon)
+
+
+def test_unidad_del_simbolo_y_aviso_de_redondeo():
+    # BTC a ~81k con 0,001 de paso: 5 USD de riesgo con stop a 4% caben en
+    # 0,0015 BTC y el redondeo deja 0,001, o sea ~2/3 de lo pedido.
+    t, h, lo, c = _series()
+    c, h, lo = c * 40, h * 40, lo * 40
+    s = daily_structure(t, h, lo, c)
+    entry = float(c[-1])
+    p = build_plan(
+        s,
+        mark=entry,
+        entry=entry,
+        stop=entry * 0.96,
+        targets=[entry * 1.08],
+        capital=500,
+        risk=0.01,
+        leverages=[3],
+        horizon_days=5,
+        maker_entry=True,
+    )
+    txt = render(s, p, funding=None, stale_mark=False, symbol="BTCUSDT")
+    assert " BTC · notional" in txt and " ETH · notional" not in txt
+    assert p.sizings[0].loss_at_stop < 0.8 * p.sizings[0].risk_budget
+    assert "redondea hacia abajo" in txt
