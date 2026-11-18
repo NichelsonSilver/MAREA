@@ -16,6 +16,7 @@ import {
 } from "recharts";
 
 import { Badge, Card, ErrorBox, Loading, Warning } from "../components/common/Card";
+import { MarketFlowCard } from "../components/marea/MarketFlowCard";
 import { useLang } from "../i18n";
 import { api } from "../lib/api";
 import { INK, SERIES, TOOLTIP_STYLE } from "../lib/chartTheme";
@@ -97,6 +98,8 @@ export function FlowsPage() {
           </Badge>
         </div>
       </div>
+
+      <MarketFlowCard />
 
       {q.isLoading && <Loading what={tr("relative strength", "la fuerza relativa")} />}
       {q.error && <ErrorBox>{String(q.error)}</ErrorBox>}

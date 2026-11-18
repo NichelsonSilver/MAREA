@@ -18,7 +18,16 @@ from typing import Any, Literal
 
 from fastapi import APIRouter, HTTPException, Query
 
-from marea import brief, i18n, industries, narrative, panorama, strength
+from marea import (
+    brief,
+    flow,
+    i18n,
+    industries,
+    narrative,
+    panorama,
+    strength,
+    world_order,
+)
 from marea.config import DB_PATH
 from marea.data import store
 from marea.power_run import ARTIFACTS
@@ -132,6 +141,51 @@ async def industry_growth(
         rep["defi"]["age_days"] = age
         rep["defi"]["stale"] = age > 1  # foto diaria: un día sin correr ya es hueco
     return i18n.industries(rep, lang)
+
+
+def _flow(path: Path) -> dict[str, Any] | None:
+    if not path.exists():
+        return None
+    conn = store.connect(path)
+    try:
+        return flow.from_db(conn, _bob_db() if _bob_db().exists() else None)
+    finally:
+        conn.close()
+
+
+@router.get("/macro/flow")
+async def market_flow() -> dict[str, Any]:
+    """El mercado completo agrupado por función (macro + sectores + cripto). Descriptivo.
+
+    Las etiquetas van en claves estables (`group`, `ticker`); el frontend las
+    traduce. Las cifras no dependen del idioma.
+    """
+    rep = await asyncio.to_thread(_flow, _db_path())
+    if rep is None:
+        raise HTTPException(status_code=404, detail="no hay base de MAREA")
+    age = (datetime.now(UTC).date() - date.fromisoformat(rep["as_of"])).days
+    rep["age_days"] = age
+    rep["stale"] = age > 4  # mismo criterio que /macro/strength
+    return rep
+
+
+def _world_order(path: Path) -> dict[str, Any] | None:
+    if not path.exists():
+        return None
+    conn = store.connect(path)
+    try:
+        return world_order.from_db(conn, datetime.now(UTC).date())
+    finally:
+        conn.close()
+
+
+@router.get("/macro/world-order")
+async def world_order_report() -> dict[str, Any]:
+    """Huellas de precio del orden mundial en seis dimensiones. Sin pronóstico."""
+    rep = await asyncio.to_thread(_world_order, _db_path())
+    if rep is None:
+        raise HTTPException(status_code=404, detail="no hay base de MAREA")
+    return rep
 
 
 def _artifacts_dir() -> Path:

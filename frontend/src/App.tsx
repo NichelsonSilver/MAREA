@@ -8,6 +8,7 @@ import { FlowsPage } from "./pages/FlowsPage";
 import { HistoryPage } from "./pages/HistoryPage";
 import { HomePage } from "./pages/HomePage";
 import { IndustriesPage } from "./pages/IndustriesPage";
+import { WorldOrderPage } from "./pages/WorldOrderPage";
 import { LabPage } from "./pages/LabPage";
 import { MacroPage } from "./pages/MacroPage";
 import { MapPage } from "./pages/MapPage";
@@ -46,6 +47,7 @@ export function App() {
         <Route path="/liquidez" element={<MacroPage />} />
         <Route path="/flujos" element={<FlowsPage />} />
         <Route path="/industrias" element={<IndustriesPage />} />
+        <Route path="/orden-mundial" element={<WorldOrderPage />} />
         <Route path="/cripto" element={<CryptoPage />} />
         <Route path="/cripto/panorama" element={<PanoramaPage />} />
         <Route path="/cripto/panel" element={<PanelPage />} />

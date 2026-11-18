@@ -78,6 +78,7 @@ BOB).
 | `auditor` | Lookahead, pre-registro, potencia, regla 2 | `/auditar` |
 | `coordinador` | Integra todo en un memo que separa lo medido de lo narrado | `/informe` |
 | `estratega` | Evalúa una idea de trade de Nichelson: estructura, stop, tamaño, leverage máximo y escenarios (`marea.tradeplan`); nunca la inventa ni la ejecuta | `/estrategia` |
+| — (hilo principal, usa búsqueda web) | Análisis macro de lo que acaba de pasar: mercado completo por función (`marea.flow`, página Flujos), rareza de un movimiento (`marea.flow --rareza`), huellas del orden mundial (`marea.world_order`, página **Orden mundial**), contexto web y escenarios **rotulados como juicio, sin respaldo forward**, que se registran con regla de resolución medible y se califican con Brier al vencer (`marea.scenarios`, `escenarios/registro.jsonl`, solo-agregar) | `/macro` |
 
 Los agentes **leen y calculan con el código del repo**; no inventan cifras.
 Una cifra en un memo que no salga de un comando o de un artefacto es un bug de

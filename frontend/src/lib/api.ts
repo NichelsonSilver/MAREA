@@ -19,7 +19,9 @@ import type {
   GateResponse,
   HealthResponse,
   HistoryResponse,
+  FlowReport,
   IndustriesReport,
+  WorldOrderReport,
   LabExperiments,
   LatestResponse,
   LiquidityReport,
@@ -130,6 +132,12 @@ export const api = {
   /** MAREA: crecimiento por industria (sectores de EE.UU. y DeFi). Descriptivo: no es flujo. */
   industries: (weeks: number, lang?: Lang) =>
     request<IndustriesReport>(`/api/macro/industries${query({ weeks, lang })}`),
+
+  /** MAREA: mercado completo agrupado por función (macro + sectores + cripto). Descriptivo. */
+  flow: () => request<FlowReport>("/api/macro/flow"),
+
+  /** MAREA: huellas de precio del orden mundial en seis dimensiones. Sin pronóstico. */
+  worldOrder: () => request<WorldOrderReport>("/api/macro/world-order"),
 
   /** MAREA: veredicto del gate M3, leído del artefacto versionado. */
   rankingVerdict: (lang?: Lang) =>

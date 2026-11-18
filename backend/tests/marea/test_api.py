@@ -100,3 +100,18 @@ def test_narrativa_reciente(monkeypatch: pytest.MonkeyPatch) -> None:
     body = TestClient(app).get("/api/macro/narrative?days=7").json()
     assert body == {"days": 7, "entries": []}
     assert TestClient(app).get("/api/macro/narrative?days=0").status_code == 422
+
+
+def test_flujo_y_orden_mundial_sin_base(db: Path) -> None:
+    client = TestClient(app)
+    assert client.get("/api/macro/flow").status_code == 404
+    assert client.get("/api/macro/world-order").status_code == 404
+    assert not db.exists()  # leer no crea la base
+
+
+def test_flujo_marca_frescura(db: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    db.touch()
+    as_of = (datetime.now(UTC).date() - timedelta(days=6)).isoformat()
+    monkeypatch.setattr(api.flow, "from_db", lambda conn, bob: {"as_of": as_of})
+    body = TestClient(app).get("/api/macro/flow").json()
+    assert body["age_days"] == 6 and body["stale"] is True

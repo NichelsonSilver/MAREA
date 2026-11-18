@@ -1127,3 +1127,77 @@ export type LabExperiments = {
   experiments: LabExperiment[];
   counts: Partial<Record<LabStatus, number>>;
 };
+
+// --- MAREA: mercado completo por función (/api/macro/flow) ------------------
+
+export type FlowWindow = "1s" | "4s" | "13s" | "26s" | "52s";
+
+export interface FlowGroup {
+  group: string;
+  members: string[];
+  rotation: number | null;
+  [k: string]: unknown;
+}
+
+export interface FlowAsset {
+  ticker: string;
+  label: string;
+  group: string | null;
+  reference: boolean;
+  [k: string]: unknown;
+}
+
+export interface FlowReport {
+  evidence: string;
+  as_of: string;
+  age_days: number;
+  stale: boolean;
+  windows: FlowWindow[];
+  groups: FlowGroup[];
+  assets: FlowAsset[];
+  risk_appetite: Record<FlowWindow, { score: number | null; pct: number | null; n_past: number }>;
+  risk_on: string[];
+  risk_off: string[];
+  leaders: Record<FlowWindow, string[]>;
+  laggards: Record<FlowWindow, string[]>;
+  method: Record<string, string>;
+}
+
+// --- MAREA: orden mundial (/api/macro/world-order) ---------------------------
+
+export interface WorldMetric {
+  key: string;
+  label: string;
+  kind: "level" | "ratio";
+  unit: "pct" | "pp";
+  as_of?: string;
+  value?: number | null;
+  pct?: number | null;
+  pct_basis?: string;
+  since?: string;
+  chg_13s?: number | null;
+  chg_1a?: number | null;
+  chg_3a?: number | null;
+  chg_5a?: number | null;
+  error?: string;
+}
+
+export interface WorldDimension {
+  key: string;
+  label: string;
+  up_means: string;
+  headline: WorldMetric;
+  support: WorldMetric[];
+  reading: {
+    long_trend: "sube" | "baja" | "plano" | null;
+    short_phase: "sube" | "baja" | "plano" | null;
+    against_trend: boolean;
+  };
+}
+
+export interface WorldOrderReport {
+  evidence: string;
+  known_at: string;
+  dimensions: WorldDimension[];
+  method: Record<string, string>;
+}

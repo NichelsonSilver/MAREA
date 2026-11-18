@@ -118,6 +118,12 @@ FRED_SERIES: tuple[FredSeries, ...] = (
     FredSeries("VIXCLS", "riesgo", "VIX"),
     # --- Commodities ---
     FredSeries("DCOILWTICO", "commodities", "Petróleo WTI spot"),
+    FredSeries(
+        "DCOILBRENTEU",
+        "commodities",
+        "Petróleo Brent spot: el precio de referencia global y el que mueve la geopolítica",
+        caveat="publicado por la EIA con ~1 semana de rezago",
+    ),
     FredSeries("DHHNGSP", "commodities", "Gas Henry Hub spot"),
     FredSeries(
         "PCOPPUSDM",
